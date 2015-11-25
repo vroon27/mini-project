@@ -1,3 +1,2 @@
 #include<iostream.h>
-gsbhbjd
-fuc
+#include<conio.h>
