@@ -12,4 +12,41 @@ int main()
   FILE *fp1,*fp2,*fp3,*fp4;
   printf("ENTER THE PROGRAM FILE NAME  : \n");
   scanf("%s",&fnm);
-  fp1 = fopen("medioter.txt","w"); 
+  fp1 = fopen("addressed.txt","w"); 
+  fp3 = fopen(fnm,"r");
+  if(fp3==NULL)
+  {
+      printf("FILE NAME DOES NOT EXIST\n");
+      printf("_____________________________\n");
+exit(1);
+  }
+  for(i=0;i<11;i++)
+  printf("-------");
+  printf("--");
+ printf("\n|\t\t\t\tINPUT FILE:\t\t\t\t      |\n");
+ for(i=0;i<11;i++)
+  printf("-------");
+  printf("--\n\n");
+  ch=fgetc(fp3);
+
+int df=0;
+  for(i=0;i<10;i++)
+  printf("___");
+  printf("\n");
+  for(i=0;ch!=EOF;i++)
+  {df++;
+   printf("%c",ch);
+
+
+   ch=fgetc(fp3);
+  }
+ rewind(fp3);
+ for(i=0;i<10;i++)
+  printf("---");
+  printf("\n");
+  for(i=0;i<10;i++)
+  printf("___");
+printf("\n\n\tSTART OF PASS 1 \n");
+for(i=0;i<10;i++)
+  printf("---");
+
