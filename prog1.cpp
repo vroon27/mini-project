@@ -97,7 +97,7 @@ for(h;strcmp(op_code,"END")!=0;h++)
    }
    else
    {
-       printf("\t\t\t\t\n\n\n\nINVALID!!!!!\n\n\n\n");
+       printf("\t\t\t\t\n\n\n\nINVALID!!!!!\n\n\n\n");              //error checked for input file
        exit(1);
    }
    fscanf(fp3,"%s%s%s",lab,op_code,operand);
