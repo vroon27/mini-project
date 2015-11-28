@@ -8,7 +8,7 @@ int main()
   int st,diff,diff1,i,address,address1,add,length,alength,final_addr,prev_addr,j=0;
   char mnem[15][15]={"LDA","STA","LDCH","STCH","J","JSUB"};
   int loc_count=0,start,l,c=0,k=0,bol=0,rt,g,cv;
-  char code[15][15]={"00","0C","50","54","3E","3F"};
+  char code[15][15]={"10","FF","01","85","3E","4J"};
   FILE *fp1,*fp2,*fp3,*fp4;
   printf("ENTER THE PROGRAM FILE NAME  : \n");
   scanf("%s",&file_name);
