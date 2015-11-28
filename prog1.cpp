@@ -242,4 +242,55 @@ printf("\n\n\t\t\tEND OF PASS 2\n");
   fclose(fp2);
   fclose(fp3);
   fclose(fp4);
+   for(i=0;i<11;i++)
+  printf("-------");
+  printf("--");
+
+  for(i=0;i<12;i++)
+  printf("  ");
+  printf("_______________");
+  printf("\n\t\t\tOUTPUT FILE :\n");
+  for(i=0;i<12;i++)
+  printf("  ");
+  printf("-------------\n");
+  fp1=fopen("Result.txt","r");
+  ch=fgetc(fp1);
+  int bv;
+  for(i=0;i<11;i++)
+  printf("____");
+printf("\n");
+  for(bv=0;ch!=EOF;bv++)
+  {
+   printf("%c",ch);
+   ch=fgetc(fp1);
+  }
+  for(i=0;i<11;i++)
+  printf("____");
+  printf("\n");
+for(i=0;i<11;i++)
+  printf("----");
+  printf("\n Object Code File content:\n");
+  for(i=0;i<11;i++)
+  printf("_____");
+  printf("\n");
+  fp4=fopen("ObjCode.txt","r");
+  ch=fgetc(fp4);
+
+  for(bv=0;ch!=EOF;bv++)
+  {
+   printf("%c",ch);
+   ch=fgetc(fp4);
+  }printf("\n");
+  for(i=0;i<11;i++)
+  printf("_____");
+  printf("\n");
+  fclose(fp1);
+  fclose(fp3);
+  fclose(fp4);
+  char fg;
+  fg=getchar();
+  getchar();
+  return 0;
+}
+
 
