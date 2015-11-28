@@ -151,3 +151,95 @@ for(i=0;i<15;i++)
    ch=fgetc(fp2);
   }
 fclose(fp2);
+for(i=0;i<15;i++)
+  printf("-");
+  printf("\n");
+  for(i=0;i<15;i++)
+  printf("-");
+printf("\n\nEND OF PASS 1");
+printf("\n\nSTART OF PASS 2 \n");
+ fp1 = fopen("Result.txt","w");
+  fp2 = fopen("symb_tab.txt","r");
+  fp3 = fopen("addressed.txt","r");
+  fp4 = fopen("ObjCode.txt","w");
+
+  fscanf(fp3,"%s%s%s",lab,op_code,operand);
+
+  for(h=0;strcmp(op_code,"END")!=0;h++)
+  {
+   prev_addr=address;
+   fscanf(fp3,"%X%s%s%s",&address,lab,op_code,operand);
+  }
+
+  final_addr=address;
+  fclose(fp3);
+
+ fp3=fopen("addressed.txt","r");
+
+  fscanf(fp3,"%s%s%s",lab,op_code,operand);
+  if(strcmp(op_code,"START")==0)
+  {
+   fprintf(fp1,"\t%s\t%s\t%s\n",lab,op_code,operand);
+   fprintf(fp4,"H^%s^00%s^0021\n",lab,operand);
+   fscanf(fp3,"%X%s%s%s",&address,lab,op_code,operand);
+   st=address;
+   diff=prev_addr-st;
+    fprintf(fp4,"T^00%X^%X",address,diff);
+  }
+  for(h=0;strcmp(op_code,"END")!=0;h++)
+  {
+   if(strcmp(op_code,"BYTE")==0)
+   {
+    fprintf(fp1,"%X\t%s\t%s\t%s\t",address,lab,op_code,operand);
+    length=strlen(operand);
+    alength=length-3;
+    fprintf(fp4,"^");
+    for(i=2;i<(alength+2);i++)
+    {
+     itoa(operand[i],ad,16);    //convert integral value to null terminated string with given base here 16
+     fprintf(fp1,"%s",ad);
+     fprintf(fp4,"%s",ad);
+    }
+    fprintf(fp1,"\n");
+   }
+   else if(strcmp(op_code,"WORD")==0)
+   {
+    length=strlen(operand);
+    itoa(atoi(operand),a,10);
+    fprintf(fp1,"%X\t%s\t%s\t%s\t00000%s\n",address,lab,op_code,operand,a);
+    fprintf(fp4,"^00000%s",a);
+   }
+   else if((strcmp(op_code,"RESB")==0)||(strcmp(op_code,"RESW")==0))
+    fprintf(fp1,"%X\t%s\t%s\t%s\n",address,lab,op_code,operand);
+   else
+   {
+   for(g=0;strcmp(op_code,mnem[j])!=0;g++)
+     j++;
+    if(strcmp(operand,"COPY")==0)
+     fprintf(fp1,"%X\t%s\t%s\t%s\t%s0000\n",address,lab,op_code,operand,code[j]);
+    else
+    {
+     rewind(fp2);
+     fscanf(fp2,"%s%X",symb,&add);
+
+for(rt=0;strcmp(operand,symb)!=0;rt++)
+       fscanf(fp2,"%s%X",symb,&add);
+     fprintf(fp1,"%X\t%s\t%s\t%s\t%s%X\n",address,lab,op_code,operand,code[j],add);
+     fprintf(fp4,"^%s%X",code[j],add);
+    }
+   }
+   fscanf(fp3,"%X%s%s%s",&address,lab,op_code,operand);
+  }
+  fprintf(fp1,"%X\t%s\t%s\t%s\n",address,lab,op_code,operand);
+  fprintf(fp4,"\nE^00%X",st);
+
+  for(i=0;i<11;i++)
+  printf("-------");
+  printf("--");
+  printf("\n\tMIDDLEWARE FILE IS CONVERTED INTO OBJECT CODE");
+printf("\n\n\t\t\tEND OF PASS 2\n");
+  fclose(fp1);
+  fclose(fp2);
+  fclose(fp3);
+  fclose(fp4);
+
